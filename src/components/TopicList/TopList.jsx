@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
-
+import TopNavbar from '../TopNavBar/TopNavBar'
 export default class TopicList extends Component {
   render () {
     return (
-      <div>列表</div>
+      <div>
+        <TopNavbar />
+      </div>
     )
   }
 }
