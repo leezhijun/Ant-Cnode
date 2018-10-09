@@ -10,6 +10,7 @@ export default class FootNavBar extends Component {
       fullScreen: true
     }
   }
+
   static contextTypes = {
     router: PropTypes.shape({
       history: PropTypes.shape({
@@ -51,7 +52,6 @@ export default class FootNavBar extends Component {
               this.setState({
                 selectedTab: 'blueTab'
               })
-              console.log(this.context.router)
               this.context.router.history.replace('/')
             }}
             data-seed='logId'

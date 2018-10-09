@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import test from './test'
+import topics from './topics'
 export default combineReducers({
-  test
+  topics
 })

@@ -1,9 +1,10 @@
 import {
-  test
+  GET_TOPICS
 } from './actionType'
 
-export const doTest = () => {
+export const getTopics = (tab) => {
   return {
-    type: test
+    type: GET_TOPICS,
+    tab
   }
 }

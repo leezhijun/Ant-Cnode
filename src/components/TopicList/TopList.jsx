@@ -1,11 +1,30 @@
 import React, { Component } from 'react'
-import TopNavbar from '../TopNavBar/TopNavBar'
+import { Tabs, WhiteSpace } from 'antd-mobile'
+import ListItem from './ListItem'
 export default class TopicList extends Component {
-  render () {
+  renderContent = tab =>
+    (
+      <ListItem tab={tab} />
+    );
+
+  render() {
+    const tabs = [
+      { title: '全部', tab: 'all' },
+      { title: '精华', tab: 'good' },
+      { title: '分享', tab: 'share' },
+      { title: '问答', tab: 'ask' },
+      { title: '招聘', tab: 'job' },
+    ];
+
     return (
       <div>
-        <TopNavbar />
+        <WhiteSpace />
+        <Tabs tabs={tabs} renderTabBar={props => <Tabs.DefaultTabBar {...props} page={5} />}>
+          {this.renderContent}
+        </Tabs>
+        <WhiteSpace />
       </div>
-    )
+    );
   }
 }
+
