@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { TabBar } from 'antd-mobile'
 import PropTypes from 'prop-types';
-export default class FootNavBar extends Component {
+import { withRouter } from 'react-router-dom'
+class FootNavBar extends Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -52,7 +53,8 @@ export default class FootNavBar extends Component {
               this.setState({
                 selectedTab: 'blueTab'
               })
-              this.context.router.history.replace('/')
+              // this.context.router.history.replace('/')
+              this.props.history.replace('/')
             }}
             data-seed='logId'
           >
@@ -80,7 +82,7 @@ export default class FootNavBar extends Component {
               this.setState({
                 selectedTab: 'redTab'
               })
-              this.context.router.history.replace('/topic')
+              this.props.history.replace('/topic')
             }}
             data-seed='logId1'
           >
@@ -129,3 +131,5 @@ export default class FootNavBar extends Component {
     )
   }
 }
+
+export default withRouter(FootNavBar)

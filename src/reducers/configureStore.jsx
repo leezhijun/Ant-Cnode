@@ -8,12 +8,9 @@ import {
   applyMiddleware
 } from 'redux'
 import appReducer from './index.js'
-export default function configureStore() {
-
-  const __isDev__ = process.env.NODE_ENV === 'development'
+export default function configureStore () {
   let store
-
-  if (__isDev__) {
+  if (process.env.NODE_ENV === 'development') {
     store = createStore(
       appReducer,
       composeWithDevTools(

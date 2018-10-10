@@ -54,6 +54,13 @@ module.exports = merge(webpackBaseConfig, {
     publicPath: '/public',
     historyApiFallback: {
       index: '/public/index.html'
+    },
+    proxy: {
+      '/api': { // api表示当前项目请求的key
+        target: 'https://cnodejs.org', // 代理服务器路径
+        // pathRewrite: {'^/api' : '/'}, // 重写路径
+        changeOrigin: true
+      }
     }
   }
 })
