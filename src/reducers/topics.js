@@ -8,7 +8,7 @@ const topics = (state = [], action = {}) => {
         ...state,
         action.tab
       ]
-    default : return state
+    default: return state
   }
 }
 export default topics

@@ -10,7 +10,8 @@ export const getTopics = (tab) => {
       }
     })
       .then(function (response) {
-        return dispatch(setTopics(tab, response.data))
+        // console.log(response)
+        dispatch(setTopics(tab, response.data))
       })
       .catch(function (error) {
         console.log(error)

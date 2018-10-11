@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import { Tabs, WhiteSpace } from 'antd-mobile'
 import ListItem from './ListItem'
 export default class TopicList extends Component {
-  renderContent = tab =>
-    (
-      <ListItem tab={tab} />
+  renderContent = tab => (
+      <ListItem tab={tab} /> //tab内容并不是按需加载
     );
 
   render() {
@@ -13,7 +12,7 @@ export default class TopicList extends Component {
       { title: '精华', tab: 'good' },
       { title: '分享', tab: 'share' },
       { title: '问答', tab: 'ask' },
-      { title: '招聘', tab: 'job' },
+      { title: '招聘', tab: 'job' }
     ];
 
     return (

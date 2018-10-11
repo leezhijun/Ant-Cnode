@@ -3,6 +3,8 @@ import { List } from 'antd-mobile'
 import { getTopics } from '../../actions'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+import moment from 'moment'
+import './listitem.css'
 const Item = List.Item
 const Brief = Item.Brief
 
@@ -10,36 +12,33 @@ class ListItem extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      toplist:[]
+      toplist: []
     }
   }
 
   componentDidMount () {
     this.props.getTopics(this.props.tab.tab)
+    console.log(this.props.tab.tab)
   }
 
-  componentWillReceiveProps (nextProps){
+  UNSAFE_componentWillReceiveProps (nextProps) {
     console.log(nextProps)
-    // let tab = this.props.tab.tab
-    // let toplist =  nextProps.topics.topics.filter(item => item.tab !== tab)
-    // console.log(toplist)
-    // this.setState({
-    //   toplist: toplist.data.data
-    // })
-    // console.log(this.state.toplist)
+    let { tab, topics } = nextProps
+    let data = topics.filter(item => item.tab === tab.tab) // 由于不是按需加载，nextProps(Topics)会首其他初始化影响
+    // console.log(nextProps,tab,data)
+    if (data.length) {
+      this.setState({
+        toplist: data[0].data.data
+      })
+    }
   }
-
   render () {
     const toplist = this.state.toplist
     return (
       <List className='my-list'>
-        { !!toplist ? <Item>loading</Item> : <Item>loading123</Item>}
-        {/* {toplist.map( item => <Item extra={item.create_at} align='top' wrap='true' thumb={item.author.avatar_url} multipleLine>
-          {item.title} <Brief>{item.tab}</Brief>
-        </Item> )} */}
-        {/* <Item extra='10:30' align='top' wrap='true' thumb='https://zos.alipayobjects.com/rmsportal/dNuvNrtqUztHCwM.png' multipleLine>
-          TitleTitleTitleTitleTitleTitleTitleTitle <Brief>subtitle66</Brief>
-        </Item> */}
+        { !toplist.length ? <Item>loading</Item> : toplist.map(item => <Item key={item.id} extra={moment(new Date(item.create_at)).fromNow()} align='top' wrap='true' thumb={item.author.avatar_url} multipleLine>
+          {item.title} <Brief>{item.reply_count}/{item.visit_count}</Brief>
+        </Item>) }
       </List>
     )
   }
@@ -54,7 +53,7 @@ if (process.env.NODE_ENV === 'development') {
   ListItem.propTypes = {
     getTopics: PropTypes.func.isRequired,
     tab: PropTypes.object.isRequired,
-    topics: PropTypes.object.isRequired
+    topics: PropTypes.array.isRequired
   }
 }
 export default connect(
