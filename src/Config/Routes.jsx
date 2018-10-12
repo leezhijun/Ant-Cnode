@@ -14,8 +14,10 @@ const Routes = () => {
         </div> */}
         <TopNavBar />
         <Route exact path='/' component={TopicList} />
-        <Route exact path='/topic' component={TopicArticle} />
-        <FootNavBar />
+        <Route exact path='/topic/:id' component={TopicArticle} />
+        <div style={{ marginTop: '3rem' }}>
+          <FootNavBar />
+        </div>
       </div>
     </Router>
   )

@@ -12,7 +12,7 @@ export default class TopNavBar extends Component {
           rightContent={[
             <Icon key='0' type='ellipsis' />
           ]}
-        >Cnode社区</NavBar>
+        >Cnode社区(个人版)</NavBar>
       </div>
     )
   }

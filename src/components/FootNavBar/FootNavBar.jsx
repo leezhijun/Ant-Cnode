@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { TabBar } from 'antd-mobile'
-import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom'
 class FootNavBar extends Component {
   constructor (props) {
@@ -12,19 +11,9 @@ class FootNavBar extends Component {
     }
   }
 
-  static contextTypes = {
-    router: PropTypes.shape({
-      history: PropTypes.shape({
-        push: PropTypes.func.isRequired,
-        replace: PropTypes.func.isRequired
-      }).isRequired,
-      staticContext: PropTypes.object
-    }).isRequired
-  }
-
   render () {
     return (
-      <div style={this.state.fullScreen ? { position: 'fixed', height: '100%', width: '100%', bottom: 0 } : { height: 400 }}>
+      <div style={this.state.fullScreen ? { position: 'fixed', width: '100%', bottom: 0 } : { height: 400 }}>
         <TabBar
           unselectedTintColor='#949494'
           tintColor='#33A3F4'

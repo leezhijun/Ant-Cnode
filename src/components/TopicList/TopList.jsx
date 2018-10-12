@@ -1,6 +1,10 @@
 import React, { Component } from 'react'
 import { Tabs, WhiteSpace } from 'antd-mobile'
 import ListItem from './ListItem'
+import { List } from 'antd-mobile'
+import { Link } from 'react-router-dom'
+const Item = List.Item
+const Brief = Item.Brief
 export default class TopicList extends Component {
   renderContent = tab => (
       <ListItem tab={tab} /> //tab内容并不是按需加载
