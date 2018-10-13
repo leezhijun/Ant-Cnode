@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { TabBar } from 'antd-mobile'
 import { withRouter } from 'react-router-dom'
+import PropTypes from 'prop-types'
 class FootNavBar extends Component {
   constructor (props) {
     super(props)
@@ -118,6 +119,13 @@ class FootNavBar extends Component {
         </TabBar>
       </div>
     )
+  }
+}
+
+if (process.env.NODE_ENV === 'development') {
+  // 类型校验
+  FootNavBar.propTypes = {
+    history: PropTypes.object.isRequired
   }
 }
 
