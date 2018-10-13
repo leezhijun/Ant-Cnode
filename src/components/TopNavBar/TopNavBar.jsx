@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import { NavBar, Icon } from 'antd-mobile'
+import { withRouter } from 'react-router-dom'
 import './navbar.css'
-export default class TopNavBar extends Component {
+class TopNavBar extends Component {
   render () {
     return (
       <div style={{ marginTop: '2.89rem' }}>
         <NavBar
           mode='light'
           icon={<Icon type='left' />}
-          onLeftClick={() => console.log('onLeftClick')}
+          onLeftClick={() => this.props.history.goBack()}
           rightContent={[
             <Icon key='0' type='ellipsis' />
           ]}
@@ -17,3 +18,4 @@ export default class TopNavBar extends Component {
     )
   }
 }
+export default withRouter(TopNavBar)
