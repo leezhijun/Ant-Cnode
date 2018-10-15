@@ -112,7 +112,7 @@ class ListItem extends Component {
         </div> :
         <List className='my-list'>
           { toplist.map(item => <Item key={item.id} extra={moment(new Date(item.create_at)).fromNow()} align='top' wrap='true' thumb={item.author.avatar_url} multipleLine>
-            <Link to={`/topic/${item.id}`} style={{ display: 'block' }}>{item.title}</Link><Brief>{item.reply_count}/{item.visit_count}</Brief>
+            <Link to={`/topic/${item.id}`} style={{ display: 'block' }}>{ item.top ? <i className='iconfont icon-crown' style={{ color: '#108ee9' }}></i> : '' }{item.title}</Link><Brief>{item.reply_count}/{item.visit_count}</Brief>
           </Item>) }
         </List>
       }

@@ -4,7 +4,7 @@ import {
 const topics = (state = [], action = {}) => {
   switch (action.type) {
     case SET_TOPOCS : // 获取话题列表数据
-      console.log(action)
+      // console.log(action)
       if (action.page > 1) { // 判断是不是翻译
         let tabHave = state.filter(item => item.tab === action.tab.tab) // 判断是第一次请求还是翻页
         let newdata = [

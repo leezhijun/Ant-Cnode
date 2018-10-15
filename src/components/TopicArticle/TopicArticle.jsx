@@ -3,7 +3,11 @@ import { getTopic } from '../../actions'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import { ActivityIndicator, WhiteSpace, WingBlank } from 'antd-mobile'
+import { ActivityIndicator, WhiteSpace, WingBlank, Flex } from 'antd-mobile'
+import CommentList from '../Comments/CommentList'
+import moment from 'moment'
+import 'github-markdown-css'
+import './topic-article.less'
 class TopicArticle extends Component {
   constructor (props) {
     super(props)
@@ -49,25 +53,55 @@ class TopicArticle extends Component {
 
   render () {
     const { topic, error, loading } = this.state
+    let tab = {}
+      tab['share'] = '分享'
+      tab['ask'] = '问答'
+      tab['job'] = '招聘'
+      tab['good'] = '精华'
+
     return (
       <div>
+        { loading ? // 判断是否正在加载...
+        <div className='loading-container'>
         <WhiteSpace />
         <WingBlank>
-        { loading ? // 判断是否正在加载...
-        <div className="loading-container">
-          <div className="loading-example">
-            <div className="align">
-              <ActivityIndicator size="large" />
+          <div className='loading-example'>
+            <div className='align'>
+              <ActivityIndicator size='large' />
               <span style={{ marginTop: 8 }}>Loading...</span>
             </div>
           </div>
-        </div> :
-          !!error ? <div>{error}</div> : // 加载完成后判断是否成功请求到数据
-          <div>{topic.title}</div>
-        }
-
         </WingBlank>
         <WhiteSpace />
+        </div> :
+          !!error ? // 加载完成后判断是否成功请求到数据
+          <div>
+            <WhiteSpace />
+            <WingBlank>
+              {error}
+            </WingBlank>
+            <WhiteSpace />
+          </div>
+           :
+          <article className='topic-article'>
+            <WhiteSpace />
+            <WingBlank>
+            <h1>{ topic.top ? <i className='iconfont icon-crown' style={{ color: '#108ee9' }}></i> : '' }{topic.title}</h1>
+            <Flex wrap='wrap' className='changes'>
+              <div className='inline'><i className='iconfont icon-time-circle'></i>{moment(new Date(topic.create_at)).fromNow()}</div>
+              <div className='inline'><i className='iconfont icon-user'></i>{topic.author.loginname}</div>
+              <div className='inline'><i className='iconfont icon-eye'></i>{topic.visit_count}</div>
+              <div className='inline'><i className='iconfont icon-folder-open'></i>{tab[topic.tab]}</div>
+            </Flex>
+            <WhiteSpace />
+            <article className='markdown-body' dangerouslySetInnerHTML = {{ __html: topic.content }}></article>
+            <CommentList replyCount={topic.reply_count} replies={topic.replies} />
+            </WingBlank>
+            <WhiteSpace />
+
+          </article>
+
+        }
       </div>
     )
   }

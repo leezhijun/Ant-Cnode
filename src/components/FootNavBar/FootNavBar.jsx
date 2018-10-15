@@ -25,20 +25,12 @@ class FootNavBar extends Component {
           <TabBar.Item
             title='首页'
             key='首页'
-            icon={<div style={{
-              width: '22px',
-              height: '22px',
-              background: 'url(https://zos.alipayobjects.com/rmsportal/sifuoDUQdAFKAVcFGROC.svg) center center /  21px 21px no-repeat' }}
-            />
+            icon={
+              <i className='iconfont icon-home' style={{ fontSize: '22px' }}></i>
             }
-            selectedIcon={<div style={{
-              width: '22px',
-              height: '22px',
-              background: 'url(https://zos.alipayobjects.com/rmsportal/iSrlOTqrKddqbOmlvUfq.svg) center center /  21px 21px no-repeat' }}
-            />
-            }
+            selectedIcon={
+              <i className='iconfont icon-home' style={{ fontSize: '22px' }}></i>}
             selected={this.state.selectedTab === 'blueTab'}
-            badge={1}
             onPress={() => {
               this.setState({
                 selectedTab: 'blueTab'
@@ -51,22 +43,13 @@ class FootNavBar extends Component {
           </TabBar.Item>
           <TabBar.Item
             icon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://gw.alipayobjects.com/zos/rmsportal/BTSsmHkPsQSPTktcXyTV.svg) center center /  21px 21px no-repeat' }}
-              />
+              <i className='iconfont icon-edit' style={{ fontSize: '22px' }}></i>
             }
             selectedIcon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://gw.alipayobjects.com/zos/rmsportal/ekLecvKBnRazVLXbWOnE.svg) center center /  21px 21px no-repeat' }}
-              />
+              <i className='iconfont icon-edit' style={{ fontSize: '22px' }}></i>
             }
             title='发表'
             key='发表'
-            badge={'new'}
             selected={this.state.selectedTab === 'redTab'}
             onPress={() => {
               this.setState({
@@ -79,18 +62,10 @@ class FootNavBar extends Component {
           </TabBar.Item>
           <TabBar.Item
             icon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://zos.alipayobjects.com/rmsportal/psUFoAMjkCcjqtUCNPxB.svg) center center /  21px 21px no-repeat' }}
-              />
+              <i className='iconfont icon-bell' style={{ fontSize: '22px' }}></i>
             }
             selectedIcon={
-              <div style={{
-                width: '22px',
-                height: '22px',
-                background: 'url(https://zos.alipayobjects.com/rmsportal/IIRLrXXrFAhXVdhMWgUI.svg) center center /  21px 21px no-repeat' }}
-              />
+              <i className='iconfont icon-bell' style={{ fontSize: '22px' }}></i>
             }
             title='消息'
             key='消息'
@@ -104,8 +79,12 @@ class FootNavBar extends Component {
           >
           </TabBar.Item>
           <TabBar.Item
-            icon={{ uri: 'https://zos.alipayobjects.com/rmsportal/asJMfBrNqpMMlVpeInPQ.svg' }}
-            selectedIcon={{ uri: 'https://zos.alipayobjects.com/rmsportal/gjpzzcrPMkhfEqgbYvmN.svg' }}
+            icon={
+              <i className='iconfont icon-user' style={{ fontSize: '22px' }}></i>
+            }
+            selectedIcon={
+              <i className='iconfont icon-user' style={{ fontSize: '22px' }}></i>
+            }
             title='我的'
             key='我的'
             selected={this.state.selectedTab === 'yellowTab'}
