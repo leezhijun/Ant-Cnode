@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { getTopic } from '../../actions'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { ActivityIndicator, WhiteSpace, WingBlank, Flex } from 'antd-mobile'
 import CommentList from '../Comments/CommentList'
-import moment from 'moment'
+import { getDateTimeStamp, timeago } from '../../utils/timeHandle'
 import 'github-markdown-css'
 import './topic-article.less'
 class TopicArticle extends Component {
@@ -60,7 +60,7 @@ class TopicArticle extends Component {
       tab['good'] = '精华'
 
     return (
-      <div>
+      <Fragment>
         { loading ? // 判断是否正在加载...
         <div className='loading-container'>
         <WhiteSpace />
@@ -88,8 +88,8 @@ class TopicArticle extends Component {
             <WingBlank>
             <h1>{ topic.top ? <i className='iconfont icon-crown' style={{ color: '#108ee9' }}></i> : '' }{topic.title}</h1>
             <Flex wrap='wrap' className='changes'>
-              <div className='inline'><i className='iconfont icon-time-circle'></i>{moment(new Date(topic.create_at)).fromNow()}</div>
               <div className='inline'><i className='iconfont icon-user'></i>{topic.author.loginname}</div>
+              <div className='inline'><i className='iconfont icon-time-circle'></i>{timeago(getDateTimeStamp(topic.last_reply_at))}</div>
               <div className='inline'><i className='iconfont icon-eye'></i>{topic.visit_count}</div>
               <div className='inline'><i className='iconfont icon-folder-open'></i>{tab[topic.tab]}</div>
             </Flex>
@@ -102,7 +102,7 @@ class TopicArticle extends Component {
           </article>
 
         }
-      </div>
+      </Fragment>
     )
   }
 }

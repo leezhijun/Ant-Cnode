@@ -3,8 +3,8 @@ import { List, PullToRefresh, ActivityIndicator, WhiteSpace, WingBlank } from 'a
 import { getTopics } from '../../actions'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { getDateTimeStamp, timeago } from '../../utils/timeHandle'
 import PropTypes from 'prop-types'
-import moment from 'moment'
 import './listitem.css'
 const Item = List.Item
 const Brief = Item.Brief
@@ -111,7 +111,7 @@ class ListItem extends Component {
           </WingBlank>
         </div> :
         <List className='my-list'>
-          { toplist.map(item => <Item key={item.id} extra={moment(new Date(item.create_at)).fromNow()} align='top' wrap='true' thumb={item.author.avatar_url} multipleLine>
+          { toplist.map(item => <Item key={item.id} extra={timeago(getDateTimeStamp(item.last_reply_at))} align='top' wrap='true' thumb={item.author.avatar_url} multipleLine>
             <Link to={`/topic/${item.id}`} style={{ display: 'block' }}>{ item.top ? <i className='iconfont icon-crown' style={{ color: '#108ee9' }}></i> : '' }{item.title}</Link><Brief>{item.reply_count}/{item.visit_count}</Brief>
           </Item>) }
         </List>

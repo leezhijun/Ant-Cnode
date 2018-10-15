@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Link } from 'react-router-dom'
 import { Flex, WhiteSpace } from 'antd-mobile'
 import PropTypes from 'prop-types'
@@ -15,10 +15,8 @@ export default class Comment extends Component {
           </div>
           <div className='comment-title-right'>
             {
-              // this.props.ups.length ?
-              // <i className='iconfont icon-like'></i> {this.props.ups.length} : ''
+              this.props.ups.length ? <Fragment><i className='iconfont icon-like'></i>{this.props.ups.length}&nbsp;&nbsp;</Fragment> : ''
             }
-            <i className='iconfont icon-like'></i>{this.props.ups.length}&nbsp;&nbsp;
             <i className='iconfont icon-edit-square'></i>
           </div>
         </Flex>
