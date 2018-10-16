@@ -1,6 +1,8 @@
 import {
   SET_TOPOCS,
-  SET_TOPOC
+  SET_TOPOC,
+  SET_LOGIN,
+  SET_USER
 } from './actionType'
 import axios from 'axios'
 
@@ -70,6 +72,42 @@ export /**
 const setTopic = (data) => {
   return {
     type: SET_TOPOC,
+    data
+  }
+}
+
+export const getLogin = (accessToken) => {
+  return dispatch => {
+    return axios.post('/api/v1/accesstoken', {
+      accesstoken: accessToken
+    })
+      .then(function (response) {
+        // console.dir(response)
+        dispatch(setLogin(response.data))
+      })
+  }
+}
+
+export const setLogin = (data) => {
+  return {
+    type: SET_LOGIN,
+    data
+  }
+}
+
+export const getUser = (loginname) => {
+  return dispatch => {
+    return axios.get(`/api/v1/user/${loginname}`)
+      .then(function (response) {
+        // console.log(response)
+        dispatch(setUser(response.data.data))
+      })
+  }
+}
+
+export const setUser = (data) => {
+  return {
+    type: SET_USER,
     data
   }
 }

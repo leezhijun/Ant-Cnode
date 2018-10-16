@@ -1,10 +1,26 @@
 import React, { Component } from 'react'
-import { NavBar, Icon, Popover } from 'antd-mobile'
+import { NavBar, Icon, Popover, Modal } from 'antd-mobile'
 import { withRouter } from 'react-router-dom'
-import { getAccessToken, removeAccessToken } from '../../utils/tokenHandle'
+import { getAccessToken, removeSessionStorage } from '../../utils/tokenHandle'
 import PropTypes from 'prop-types'
 import './navbar.css'
 const Item = Popover.Item
+const alert = Modal.alert
+const showAlert = (history) => {
+  const alertInstance = alert('Loginout', 'Are you sure???', [
+    { text: 'Cancel', onPress: () => console.log('cancel'), style: 'default' },
+    { text: 'OK', onPress: () => {
+      removeSessionStorage('AccessToken')
+      removeSessionStorage('LoginName')
+      history.replace('/login')
+    } },
+  ]);
+  setTimeout(() => {
+    // 可以调用close方法以在外部close
+    console.log('auto close');
+    alertInstance.close();
+  }, 500000);
+};
 class TopNavBar extends Component {
   state = {
     visible: false,
@@ -29,8 +45,7 @@ class TopNavBar extends Component {
       this.props.history.replace('/login')
       break
       case 'logout': // 退出登陆
-      removeAccessToken()
-      this.props.history.replace('/login')
+      showAlert(this.props.history)
       break
     }
   };
@@ -52,7 +67,7 @@ class TopNavBar extends Component {
       this.setState({
         overlay:[
           (<Item key="1" value="reload" icon={<i className='iconfont icon-reload'></i>}>刷新</Item>),
-          (<Item key="2" value="logout" icon={<i className='iconfont icon-login'></i>}>登陆</Item>)
+          (<Item key="2" value="login" icon={<i className='iconfont icon-login'></i>}>登陆</Item>)
         ]
       })
     }

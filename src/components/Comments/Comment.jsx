@@ -11,7 +11,7 @@ export default class Comment extends Component {
         <Flex className='comment-title' justify='between' align='baseline'>
           <div className='comment-title-left'>
             <img src={this.props.author.avatar_url} />
-            <Link to='/user/:loginname'>{this.props.author.loginname}</Link>
+            <Link to={'/user/' + this.props.author.loginname}>{this.props.author.loginname}</Link>
           </div>
           <div className='comment-title-right'>
             {

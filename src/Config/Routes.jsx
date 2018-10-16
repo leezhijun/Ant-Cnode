@@ -1,10 +1,11 @@
-import React,{ Fragment } from 'react'
+import React, { Fragment } from 'react'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
-import TopicList from '../components/TopicList/TopList'
-import TopicArticle from '../components/TopicArticle/TopicArticle'
-import FootNavBar from '../components/FootNavBar/FootNavBar'
-import TopNavBar from '../components/TopNavBar/TopNavBar'
-import Login from '../components/Login/Login'
+import TopicList from '../components/TopicList/TopList' // 列表组件
+import TopicArticle from '../components/TopicArticle/TopicArticle' // 文章组件
+import FootNavBar from '../components/FootNavBar/FootNavBar' // 底部组件
+import TopNavBar from '../components/TopNavBar/TopNavBar' // 头部组件
+import Login from '../components/Login/Login' // 登录组件
+import User from '../components/User/User' // 用户组件
 const Routes = () => {
   return (
     <Router>
@@ -17,6 +18,8 @@ const Routes = () => {
         <Route exact path='/' component={TopicList} />
         <Route exact path='/topic/:id' component={TopicArticle} />
         <Route exact path='/login' component={Login} />
+        <Route exact path='/user' component={User} />
+        <Route exact path='/user/:loginname' component={User} />
         <div style={{ marginTop: '3rem' }}>
           <FootNavBar />
         </div>

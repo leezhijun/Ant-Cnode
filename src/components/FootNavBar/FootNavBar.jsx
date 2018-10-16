@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { TabBar } from 'antd-mobile'
 import { withRouter } from 'react-router-dom'
 import PropTypes from 'prop-types'
+/* eslint-disable react/self-closing-comp */
 class FootNavBar extends Component {
   constructor (props) {
     super(props)
@@ -92,6 +93,7 @@ class FootNavBar extends Component {
               this.setState({
                 selectedTab: 'yellowTab'
               })
+              this.props.history.replace('/user')
             }}
           >
           </TabBar.Item>
