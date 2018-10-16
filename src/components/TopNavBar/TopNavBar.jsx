@@ -74,7 +74,7 @@ class TopNavBar extends Component {
   }
   render () {
     return (
-      <div style={{ marginTop: '2.89rem' }}>
+      <div style={{ marginTop: '2.9rem' }}>
         <NavBar
           mode='light'
           icon={<Icon type='left' />}

@@ -4,7 +4,8 @@ import { withRouter } from 'react-router-dom'
 import { ActivityIndicator, WhiteSpace, WingBlank } from 'antd-mobile'
 import { connect } from 'react-redux'
 import { getUser } from '../../actions'
-import { UserHead } from './UserHead'
+import UserArticle from './UserArticle'
+import './user.less'
 import PropTypes from 'prop-types'
 class User extends Component {
   constructor (props) {
@@ -16,7 +17,7 @@ class User extends Component {
     }
   }
 
-  componentDidMount () {
+  componentWillMount () {
     const { match, getUser } = this.props
     let loginName = match.params.loginname // 判断有没有用户名
     const that = this
@@ -46,6 +47,7 @@ class User extends Component {
   }
   render () {
     const { loading, error, user } = this.state
+    // console.log(user)
     return (
       <Fragment>
         { loading ? <div className='loading-container'>
@@ -68,11 +70,12 @@ class User extends Component {
         </Fragment> : <article className='topic-article'>
           <WhiteSpace />
           <WingBlank>
-            <UserHead loginname={user.loginname} avatar_url={user.avatar_url}/>
+            <UserArticle user={user} />
           </WingBlank>
           <WhiteSpace />
         </article>
         }
+        <WhiteSpace />
       </Fragment>
     )
   }

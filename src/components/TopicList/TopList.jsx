@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import { Tabs, WhiteSpace } from 'antd-mobile'
 import ListItem from './ListItem'
 
@@ -17,13 +17,13 @@ export default class TopicList extends Component {
     ];
 
     return (
-      <div>
-        <WhiteSpace />
+      <Fragment >
         <Tabs tabs={tabs} renderTabBar={props => <Tabs.DefaultTabBar {...props} page={5} />}>
           {this.renderContent}
         </Tabs>
         <WhiteSpace />
-      </div>
+
+      </Fragment >
     );
   }
 }

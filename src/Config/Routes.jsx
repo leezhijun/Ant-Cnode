@@ -20,9 +20,9 @@ const Routes = () => {
         <Route exact path='/login' component={Login} />
         <Route exact path='/user' component={User} />
         <Route exact path='/user/:loginname' component={User} />
-        <div style={{ marginTop: '3rem' }}>
-          <FootNavBar />
+        <div style={{ height: '2.5rem' }}>
         </div>
+        <FootNavBar />
       </Fragment>
     </Router>
   )
