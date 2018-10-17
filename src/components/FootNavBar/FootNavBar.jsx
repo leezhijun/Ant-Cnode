@@ -56,7 +56,7 @@ class FootNavBar extends Component {
               this.setState({
                 selectedTab: 'redTab'
               })
-              this.props.history.replace('/topic')
+              this.props.history.replace('/publish')
             }}
             data-seed='logId1'
           >

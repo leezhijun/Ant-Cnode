@@ -16,8 +16,8 @@ class User extends Component {
       user: {}
     }
   }
-
-  componentWillMount () {
+  /* eslint-disable camelcase */
+  UNSAFE_componentWillMount () {
     const { match, getUser } = this.props
     let loginName = match.params.loginname // 判断有没有用户名
     const that = this
@@ -45,6 +45,7 @@ class User extends Component {
       loading: false
     })
   }
+  /* eslint-disable no-extra-boolean-cast */
   render () {
     const { loading, error, user } = this.state
     // console.log(user)

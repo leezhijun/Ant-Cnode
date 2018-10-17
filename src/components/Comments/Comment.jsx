@@ -17,7 +17,7 @@ export default class Comment extends Component {
             {
               this.props.ups.length ? <Fragment><i className='iconfont icon-like'></i>{this.props.ups.length}&nbsp;&nbsp;</Fragment> : ''
             }
-            <i className='iconfont icon-edit-square'></i>
+            <i className='iconfont icon-chehuisekuai'></i>
           </div>
         </Flex>
         <WhiteSpace />

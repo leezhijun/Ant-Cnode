@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Toast, WhiteSpace, WingBlank, Button, Flex } from 'antd-mobile'
 import { connect } from 'react-redux'
-import { getLogin } from '../../actions'
+import { getLogin, setLogin } from '../../actions'
 import { withRouter } from 'react-router-dom'
 import { setAccessToken, setLoginName } from '../../utils/tokenHandle'
 import PropTypes from 'prop-types'
@@ -13,22 +13,23 @@ class Login extends Component {
 
   successToast = () => {
     const that = this
+    const { setLogin } = this.props
     if (this.state.accessToken=='') {
       Toast.info('accessToken not be empty', 1);
       return false
     }
     Toast.loading('Loading...', 1, () => {
       this.props.getLogin(this.state.accessToken)
-      .then(()=>{
-        // console.log('存accessToken')
-        setAccessToken(that.state.accessToken)
-        Toast.success('Login success!', 1)
-      })
-      .catch(function (error) { // 请求话题文章数据，如果有错这抛出错误
-        if (error.request.statusText) {
-          Toast.fail('Login fail: '+ error.request.statusText, 2)
-        }
-      })
+        .then(function (response) {
+          Toast.success('Login success!', 1, ()=>{
+            setAccessToken(that.state.accessToken) // 存token令牌
+            setLoginName(response.data.loginname) // 存用户名
+            setLogin(response.data) // 用户数据存入redux
+          })
+        })
+        .catch(function (error) { // 请求话题文章数据，如果有错这抛出错误
+          Toast.fail('Login fail: '+ error.request.statusText, 1)
+        })
     })
 
   }
@@ -38,11 +39,10 @@ class Login extends Component {
     })
   }
   UNSAFE_componentWillReceiveProps (nextProps) {
+    console.log(123)
     const { login, history } = nextProps
     let loginName = login.loginname
     if (loginName) {
-      // console.log('loginName')
-      setLoginName(loginName) // 实际上比存贮AccessToken先一步执行
       history.replace('/user')
     }
   }
@@ -64,7 +64,8 @@ class Login extends Component {
 if (process.env.NODE_ENV === 'development') {
   Login.propTypes = {
     history: PropTypes.object.isRequired,
-    getLogin: PropTypes.func.isRequired
+    getLogin: PropTypes.func.isRequired,
+    setLogin: PropTypes.func.isRequired,
   }
 }
 
@@ -74,4 +75,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default withRouter(connect(mapStateToProps,{getLogin})(Login))
+export default withRouter(connect(mapStateToProps,{getLogin, setLogin})(Login))
