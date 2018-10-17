@@ -209,3 +209,28 @@ const setCollect = () => {
     type: SET_COLLECT
   }
 }
+
+export /**
+ * 用户评论点赞
+ *
+ * @param {string} accessToken 用户令牌
+ * @param {string} replyId 回复id
+ * @returns
+ */
+const getUps = (accessToken, replyId) => {
+  return dispatch => {
+    return axios.post(`/api/v1/reply/${replyId}/ups`, {
+      accesstoken: accessToken
+    })
+  }
+}
+
+export const getReply = (accessToken, content, topicId, replyId) => {
+  return dispatch => {
+    return axios.post(`/api/v1/topic/${topicId}/replies`, {
+      accesstoken: accessToken,
+      content,
+      reply_id: replyId
+    })
+  }
+}

@@ -117,7 +117,7 @@ class Publish extends Component {
         </Picker>
         <InputItem
             placeholder="文章标题" value={this.state.title} onChange={this.changeValueTitlte}
-          />
+          >标题</InputItem>
         <TextareaItem
             placeholder="文本内容"
             data-seed="logId"

@@ -96,7 +96,7 @@ class TopicArticle extends Component {
       tab['ask'] = '问答'
       tab['job'] = '招聘'
       tab['good'] = '精华'
-      tab['dev'] = '客户端测试'
+      tab['dev'] = '客户端'
     return (
       <Fragment>
         { loading ? // 判断是否正在加载...
@@ -141,7 +141,7 @@ class TopicArticle extends Component {
             </Flex>
             <WhiteSpace />
             <article className='markdown-body' dangerouslySetInnerHTML = {{ __html: topic.content }}></article>
-            <CommentList replyCount={topic.reply_count} replies={topic.replies} />
+            <CommentList replyCount={topic.reply_count} replies={topic.replies} topicId={topic.id}/>
             { accessToken ? '' : <Link to='/login'><div style={{textAlign: 'center'}}>您没有登录,请先登录</div></Link>}
             <WhiteSpace />
             </WingBlank>
