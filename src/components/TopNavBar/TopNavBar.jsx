@@ -1,26 +1,14 @@
 import React, { Component } from 'react'
 import { NavBar, Icon, Popover, Modal } from 'antd-mobile'
 import { withRouter } from 'react-router-dom'
-import { getAccessToken, removeSessionStorage } from '../../utils/tokenHandle'
+import { connect } from 'react-redux'
+import { clearUser } from '../../actions'
+import { removeSessionStorage } from '../../utils/tokenHandle'
 import PropTypes from 'prop-types'
 import './navbar.css'
 const Item = Popover.Item
 const alert = Modal.alert
-const showAlert = (history) => {
-  const alertInstance = alert('Loginout', 'Are you sure???', [
-    { text: 'Cancel', onPress: () => console.log('cancel'), style: 'default' },
-    { text: 'OK', onPress: () => {
-      removeSessionStorage('AccessToken')
-      removeSessionStorage('LoginName')
-      history.replace('/login')
-    } },
-  ]);
-  setTimeout(() => {
-    // 可以调用close方法以在外部close
-    console.log('auto close');
-    alertInstance.close();
-  }, 500000);
-};
+
 class TopNavBar extends Component {
   state = {
     visible: false,
@@ -45,19 +33,20 @@ class TopNavBar extends Component {
       this.props.history.replace('/login')
       break
       case 'logout': // 退出登陆
-      showAlert(this.props.history)
+      this.showAlert(this.props.history,this.props.clearUser)
       break
     }
   };
+
   handleVisibleChange = (visible) => {
     this.setState({
       visible,
     });
   }
 
-  componentDidMount () {
-    const accessToken = getAccessToken() ? getAccessToken() : null
-    if (accessToken) {
+  componentWillReceiveProps (nextProps) {
+    const loginName = nextProps.loginName
+    if (loginName) {
       this.setState({
         overlay:[
           (<Item key="1" value="reload" icon={<i className='iconfont icon-reload'></i>}>刷新</Item>),
@@ -73,6 +62,24 @@ class TopNavBar extends Component {
       })
     }
   }
+
+  showAlert = (history,clearUser) => {
+    const alertInstance = alert('Loginout', 'Are you sure???', [
+      { text: 'Cancel', onPress: () => console.log('cancel'), style: 'default' },
+      { text: 'OK', onPress: () => {
+        removeSessionStorage('AccessToken')
+        removeSessionStorage('LoginName')
+        clearUser()
+        history.replace('/login')
+      } },
+    ]);
+    setTimeout(() => {
+      // 可以调用close方法以在外部close
+      console.log('auto close');
+      alertInstance.close();
+    }, 500000);
+  };
+
   render () {
     return (
       <div style={{ marginTop: '2.9rem' }}>
@@ -113,8 +120,15 @@ class TopNavBar extends Component {
 
 if (process.env.NODE_ENV === 'development') {
   TopNavBar.propTypes = {
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    loginName: PropTypes.string,
+    clearUser: PropTypes.func.isRequired,
+  }
+}
+const mapStateToProps = (state) => {
+  return {
+    loginName: state.user.loginname
   }
 }
 
-export default withRouter(TopNavBar)
+export default withRouter(connect(mapStateToProps,{clearUser})(TopNavBar))

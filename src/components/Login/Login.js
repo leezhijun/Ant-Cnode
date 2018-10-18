@@ -13,7 +13,7 @@ class Login extends Component {
 
   successToast = () => {
     const that = this
-    const { setLogin } = this.props
+    const { setLogin, history } = this.props
     if (this.state.accessToken=='') {
       Toast.info('accessToken not be empty', 1);
       return false
@@ -25,6 +25,7 @@ class Login extends Component {
             setAccessToken(that.state.accessToken) // 存token令牌
             setLoginName(response.data.loginname) // 存用户名
             setLogin(response.data) // 用户数据存入redux
+            history.replace('/user')
           })
         })
         .catch(function (error) { // 请求话题文章数据，如果有错这抛出错误
@@ -33,19 +34,13 @@ class Login extends Component {
     })
 
   }
+
   changeHandle = (e) => {
     this.setState({
       accessToken: e.target.value
     })
   }
-  UNSAFE_componentWillReceiveProps (nextProps) {
-    console.log(123)
-    const { login, history } = nextProps
-    let loginName = login.loginname
-    if (loginName) {
-      history.replace('/user')
-    }
-  }
+
   render () {
     return (
       <WingBlank>

@@ -29,12 +29,8 @@ class User extends Component {
         })
       })
     } else {
-      loginName = getLoginName() // 判断是否登录
-      if (loginName) { // 路由没哟user参数，且已经登录则用登录用户名
-        this.props.history.replace(`/user/${loginName}`)
-      } else {
-        this.props.history.replace('/login') // 没有登录则跳转登录页面
-      }
+      loginName = getLoginName() // 获取登陆用户名
+      this.props.history.replace(`/user/${loginName}`)
     }
   }
 

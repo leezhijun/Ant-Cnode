@@ -4,3 +4,4 @@ export const SET_LOGIN = 'SET_LOGIN' // 处理用户登录
 export const SET_USER = 'SET_USER' // 处理用户数据
 export const SET_COLLECT = 'SET_COLLECT' // 出来文章收藏或取消收藏
 export const SET_MESSAGE = 'SET_MESSAGE' // 出现消息数据
+export const CLEAR_USER = 'CLEAR_USER' // 清除用户数据

@@ -4,7 +4,8 @@ import {
   SET_LOGIN,
   SET_USER,
   SET_COLLECT,
-  SET_MESSAGE
+  SET_MESSAGE,
+  CLEAR_USER
 } from './actionType'
 import axios from 'axios'
 import { getAccessToken } from '../utils/tokenHandle'
@@ -145,6 +146,12 @@ const setUser = (data) => {
   return {
     type: SET_USER,
     data
+  }
+}
+
+export const clearUser = () => {
+  return {
+    type: CLEAR_USER
   }
 }
 

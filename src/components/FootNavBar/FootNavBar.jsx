@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { TabBar } from 'antd-mobile'
 import { withRouter } from 'react-router-dom'
+import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 /* eslint-disable react/self-closing-comp */
 class FootNavBar extends Component {
@@ -9,7 +10,21 @@ class FootNavBar extends Component {
     this.state = {
       selectedTab: 'blueTab',
       hidden: false,
-      fullScreen: true
+      fullScreen: true,
+      isLogin: false
+    }
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const loginName = nextProps.loginName
+    if (loginName) {
+      this.setState({
+        isLogin: true
+      })
+    } else {
+      this.setState({
+        isLogin: false
+      })
     }
   }
 
@@ -56,7 +71,11 @@ class FootNavBar extends Component {
               this.setState({
                 selectedTab: 'redTab'
               })
-              this.props.history.replace('/publish')
+              if (this.state.isLogin) {
+                this.props.history.replace('/publish')
+              } else {
+                this.props.history.replace('/login')
+              }
             }}
             data-seed='logId1'
           >
@@ -76,7 +95,11 @@ class FootNavBar extends Component {
               this.setState({
                 selectedTab: 'greenTab'
               })
-              this.props.history.replace('/message')
+              if (this.state.isLogin) {
+                this.props.history.replace('/message')
+              } else {
+                this.props.history.replace('/login')
+              }
             }}
           >
           </TabBar.Item>
@@ -94,7 +117,11 @@ class FootNavBar extends Component {
               this.setState({
                 selectedTab: 'yellowTab'
               })
-              this.props.history.replace('/user')
+              if (this.state.isLogin) {
+                this.props.history.replace('/user')
+              } else {
+                this.props.history.replace('/login')
+              }
             }}
           >
           </TabBar.Item>
@@ -107,8 +134,14 @@ class FootNavBar extends Component {
 if (process.env.NODE_ENV === 'development') {
   // 类型校验
   FootNavBar.propTypes = {
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    loginName: PropTypes.string
+  }
+}
+const mapStateToProps = (state) => {
+  return {
+    loginName: state.user.loginname
   }
 }
 
-export default withRouter(FootNavBar)
+export default withRouter(connect(mapStateToProps, null)(FootNavBar))

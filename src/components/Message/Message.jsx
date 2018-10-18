@@ -11,18 +11,11 @@ class Message extends Component {
     hasnot_read_messages: []
   }
 
-  UNSAFE_componentWillMount() {
-    const assessToken = getAccessToken()
-    if (!assessToken) {
-      this.props.history.replace('/login')
-    }
-  }
-
   componentDidMount () {
     const  { getMessage } = this.props
     const assessToken = getAccessToken()
     getMessage(assessToken).catch((error)=>{
-      Toast.info('请求失败'+error.request.statusText, 1.5)
+      Toast.info('请求失败' + error.request.statusText, 1.5)
      })
   }
 
@@ -33,11 +26,12 @@ class Message extends Component {
       hasnot_read_messages: message.hasnot_read_messages
     })
   }
+
   markHandle = (id) => {
     const  { getMessageMark } = this.props
     const assessToken = getAccessToken()
     getMessageMark(assessToken,id).catch((error)=>{
-      console.log('massage mark fail!')
+      // console.log('massage mark fail!')
      })
   }
 
@@ -48,7 +42,7 @@ class Message extends Component {
           <Accordion defaultActiveKey='1' onChange={this.onChange}>
             <Accordion.Panel header={<div>未读消息&nbsp;&nbsp;<Badge text={77} overflowCount={hasnot_read_messages.length} /></div>}>
               <List>
-                {hasnot_read_messages.map(item => <List.Item key={item.id}><Link onClick={e => {this.markHandle(item.id)}} to={'/topic/' + item.topic.id + '#' + item.reply.id}>{item.topic.title}</Link></List.Item>)}
+                {hasnot_read_messages.map(item => <List.Item key={item.id} onClick={e => {this.markHandle(item.id)}} ><Link to={'/topic/' + item.topic.id + '#' + item.reply.id}>{item.topic.title}</Link></List.Item>)}
               </List>
             </Accordion.Panel>
           </Accordion>

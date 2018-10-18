@@ -12,10 +12,6 @@ const Routes = () => {
   return (
     <Router>
       <Fragment>
-        {/* <div className='ui three item menu'>
-          <NavLink exact activeClassName='active' className='item' to='/'>列表</NavLink>
-          <NavLink activeClassName='active' className='item' to='/topic'>文章</NavLink>
-        </div> */}
         <TopNavBar />
         <Route exact path='/' component={TopicList} />
         <Route exact path='/topic/:id' component={TopicArticle} />
