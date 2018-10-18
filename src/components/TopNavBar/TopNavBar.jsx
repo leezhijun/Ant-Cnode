@@ -53,7 +53,8 @@ class TopNavBar extends Component {
     this.setState({
       visible,
     });
-  };
+  }
+
   componentDidMount () {
     const accessToken = getAccessToken() ? getAccessToken() : null
     if (accessToken) {

@@ -5,12 +5,15 @@ import {
 const topic = (state = {}, action = {}) => {
   switch (action.type) {
     case SET_TOPOC :
-      return action.data
-    case SET_COLLECT :
-      let is_collect = !Object.assign({}, state).is_collect
       return {
         ...state,
-        is_collect: is_collect
+        ...action.data // 有回复时，数据更新
+      }
+    case SET_COLLECT :
+      let isCollect = !Object.assign({}, state).is_collect
+      return {
+        ...state,
+        is_collect: isCollect
       }
     default: return state
   }

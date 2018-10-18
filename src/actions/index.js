@@ -3,7 +3,8 @@ import {
   SET_TOPOC,
   SET_LOGIN,
   SET_USER,
-  SET_COLLECT
+  SET_COLLECT,
+  SET_MESSAGE
 } from './actionType'
 import axios from 'axios'
 import { getAccessToken } from '../utils/tokenHandle'
@@ -225,12 +226,53 @@ const getUps = (accessToken, replyId) => {
   }
 }
 
-export const getReply = (accessToken, content, topicId, replyId) => {
+export /**
+ * 回复功能
+ *
+ * @param {*} accessToken 用户令牌
+ * @param {*} content 回复内容
+ * @param {*} topicId 文章id
+ * @param {*} replyId 回复id
+ * @returns
+ */
+const getReply = (accessToken, content, topicId, replyId) => {
   return dispatch => {
     return axios.post(`/api/v1/topic/${topicId}/replies`, {
       accesstoken: accessToken,
       content,
       reply_id: replyId
     })
+  }
+}
+
+export const getMessage = (accessToken) => {
+  return dispatch => {
+    return axios.get('/api/v1/messages', {
+      params: {
+        accesstoken: accessToken
+      }
+    })
+      .then(function (response) {
+        // console.log(response)
+        dispatch(setMessage(response.data.data))
+      })
+  }
+}
+
+export const setMessage = (data) => {
+  return {
+    type: SET_MESSAGE,
+    data
+  }
+}
+
+export const getMessageMark = (accessToken, msgId) => {
+  return dispatch => {
+    return axios.post(`/api/v1/message/mark_one/${msgId}`, {
+      accesstoken: accessToken
+    })
+      .then(function (response) {
+        console.log(response)
+      })
   }
 }

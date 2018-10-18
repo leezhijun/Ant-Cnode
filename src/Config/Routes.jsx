@@ -7,6 +7,7 @@ import TopNavBar from '../components/TopNavBar/TopNavBar' // 头部组件
 import Login from '../components/Login/Login' // 登录组件
 import User from '../components/User/User' // 用户组件
 import Publish from '../components/Publish/Publish' // 话题发布组件
+import Message from '../components/Message/Message' // 消息组件
 const Routes = () => {
   return (
     <Router>
@@ -22,6 +23,7 @@ const Routes = () => {
         <Route exact path='/user' component={User} />
         <Route exact path='/user/:loginname' component={User} />
         <Route exact path='/publish' component={Publish} />
+        <Route exact path='/message' component={Message} />
         {/* eslint-disable react/self-closing-comp */}
         <div style={{ height: '2.5rem' }}>
         </div>

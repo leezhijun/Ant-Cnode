@@ -20,10 +20,18 @@ class TopicArticle extends Component {
     }
   }
 
+  scrollToAnchor = (anchorName) => {
+    if (anchorName) {
+        // 找到锚点
+        let anchorElement = document.getElementById(anchorName);
+        // 如果对应id的锚点存在，就跳转到锚点
+        if(anchorElement) { anchorElement.scrollIntoView(); }
+    }
+  }
+
   componentDidMount () {
     const { match, getTopic } = this.props
     const that = this
-    // console.log(this.props)
     let id = match.params.id
     getTopic(id).catch(function (error) { // 请求话题文章数据，如果有错这抛出错误
       that.setState({
@@ -31,6 +39,7 @@ class TopicArticle extends Component {
         error: error.request.statusText
       })
     })
+    this.scrollToAnchor(this.props.location.hash.replace(/#/, '')) // 如果有锚点则跳转至锚点
   }
 
   UNSAFE_componentWillReceiveProps (nextProps) {
@@ -142,7 +151,6 @@ class TopicArticle extends Component {
             <WhiteSpace />
             <article className='markdown-body' dangerouslySetInnerHTML = {{ __html: topic.content }}></article>
             <CommentList replyCount={topic.reply_count} replies={topic.replies} topicId={topic.id}/>
-            { accessToken ? '' : <Link to='/login'><div style={{textAlign: 'center'}}>您没有登录,请先登录</div></Link>}
             <WhiteSpace />
             </WingBlank>
             <WhiteSpace />
@@ -168,6 +176,7 @@ if (process.env.NODE_ENV === 'development') {
     getDeCollect: PropTypes.func.isRequired,
     topic: PropTypes.object.isRequired,
     setCollect: PropTypes.func.isRequired,
+    location: PropTypes.object.isRequired
   }
 }
 

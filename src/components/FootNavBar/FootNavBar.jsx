@@ -76,6 +76,7 @@ class FootNavBar extends Component {
               this.setState({
                 selectedTab: 'greenTab'
               })
+              this.props.history.replace('/message')
             }}
           >
           </TabBar.Item>
